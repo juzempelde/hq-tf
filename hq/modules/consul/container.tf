@@ -3,12 +3,7 @@ resource "docker_container" "consul" {
   image = "${docker_image.consul.latest}"
   restart = "always"
 
-  command = [
-    "agent",
-    "-server",
-    "-bootstrap-expect=${var.bootstrap_expect}",
-    "-datacenter=${var.datacenter}"
-  ]
+  command = "${compact (local.container_args)}"
 
   volumes {
     volume_name = "${var.data_volume_name}"
