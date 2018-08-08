@@ -18,3 +18,8 @@ variable "data_volume_name" {
 variable "network" {
   type = "string"
 }
+
+variable "retry_join_address" {
+  type = "string"
+  default = ""
+}
