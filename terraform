@@ -2,4 +2,6 @@
 
 docker run --rm -it \
   -v /var/run/docker.sock:/var/run/docker.sock \
+  -v `pwd`:/root \
+  -w /root \
   hashicorp/terraform:0.11.7 $@
