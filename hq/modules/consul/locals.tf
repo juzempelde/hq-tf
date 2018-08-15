@@ -4,6 +4,7 @@ locals {
     "${var.role == "server" ? "-server" : ""}",
     "${var.role == "server" ? "-bootstrap-expect=${var.bootstrap_expect}" : ""}",
     "-datacenter=${var.datacenter}",
-    "${var.retry_join_address == "" ? "" : "-retry-join=${var.retry_join_address}"}"
+    "${var.retry_join_address == "" ? "" : "-retry-join=${var.retry_join_address}"}",
+    "${var.role == "ui" ? "-ui" : ""}"
   ]
 }

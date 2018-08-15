@@ -36,3 +36,13 @@ module "consul_server_3" {
   network = "${docker_network.all.id}"
   retry_join_address = "${local.main_server}"
 }
+
+module "consul_ui" {
+  source = "../modules/consul"
+  container_name = "consului"
+  datacenter = "${local.datacenter}"
+  data_volume_name = "consului"
+  network = "${docker_network.all.id}"
+  retry_join_address = "${local.main_server}"
+  role = "ui"
+}
