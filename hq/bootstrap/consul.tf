@@ -46,3 +46,31 @@ module "consul_ui" {
   retry_join_address = "${local.main_server}"
   role = "ui"
 }
+
+resource "docker_image" "nginx" {
+  name = "nginx:1.15.2-alpine"
+}
+
+resource "docker_container" "consul_ui_proxy" {
+  name = "consuluiproxy"
+  image = "${docker_image.nginx.latest}"
+
+  networks = ["${docker_network.all.id}"]
+  ports {
+    internal = "80"
+    external = "6100"
+  }
+
+  upload {
+    content = <<EOF
+
+server {
+  location / {
+    proxy_pass http://consului:8500;
+  }
+}
+
+EOF
+    file = "/etc/nginx/conf.d/nginx.vh.default.conf"
+  }
+}
