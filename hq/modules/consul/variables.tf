@@ -23,3 +23,8 @@ variable "retry_join_address" {
   type = "string"
   default = ""
 }
+
+variable "role" {
+  type = "string"
+  default = "server"
+}
