@@ -4,7 +4,7 @@ locals {
   network = "all"
 }
 
-module "consul_1" {
+module "consul_server_1" {
   source = "../modules/consul"
 
   bootstrap_expect = "${local.bootstrap_expect}"
@@ -14,7 +14,7 @@ module "consul_1" {
   network = "${docker_network.all.id}"
 }
 
-module "consul_2" {
+module "consul_server_2" {
   source = "../modules/consul"
 
   bootstrap_expect = "${local.bootstrap_expect}"
@@ -25,7 +25,7 @@ module "consul_2" {
   retry_join_address = "consul1"
 }
 
-module "consul_3" {
+module "consul_server_3" {
   source = "../modules/consul"
 
   bootstrap_expect = "${local.bootstrap_expect}"
